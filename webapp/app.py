@@ -9,7 +9,7 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY', 'clave-por-defecto-cambiar')
 app.config['JSON_SORT_KEYS'] = False
 
 # TODO: Configurar la URL de la API
-API_URL = os.getenv('API_URL', 'http://api:8000')
+API_URL = os.getenv('API_URL', 'http://localhost:8000')
 
 
 @app.context_processor
@@ -131,7 +131,7 @@ def cart():
         total=data.get('total', 0)
     )
 
-@app.route('/add-to-cart/<int:product_id>', methods=['POST'])
+@app.route('/add-to-cart/<product_id>', methods=['POST'])
 def add_to_cart(product_id):
     # TODO: Implementar agregar producto al carrito
     # Enviar request a la API
@@ -170,7 +170,7 @@ def add_to_cart(product_id):
     return redirect(request.referrer or url_for('products'))
 
 
-@app.route('/cart/items/<int:item_id>/update', methods=['POST'])
+@app.route('/cart/items/<item_id>/update', methods=['POST'])
 def update_cart_item(item_id):
     if not is_logged_in():
         flash('Debes iniciar sesión.', 'warning')
@@ -199,7 +199,7 @@ def update_cart_item(item_id):
     return redirect(url_for('cart'))
 
 
-@app.route('/cart/items/<int:item_id>/remove', methods=['POST'])
+@app.route('/cart/items/<item_id>/remove', methods=['POST'])
 def remove_cart_item(item_id):
     if not is_logged_in():
         flash('Debes iniciar sesión.', 'warning')

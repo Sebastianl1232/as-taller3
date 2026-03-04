@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body, Query
+from uuid import UUID
 from sqlalchemy.orm import Session
 from database import get_db
 from models.user import User
@@ -20,7 +21,7 @@ async def register_user(
             detail="Username o email ya registrado",
         )
 
-    user = User(username=username, email=email, password_hash=password, is_active=True)
+    user = User(username=username, email=email, password_hash=password)
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -31,7 +32,6 @@ async def register_user(
             "id": user.id,
             "username": user.username,
             "email": user.email,
-            "is_active": user.is_active,
         },
     }
 
@@ -49,12 +49,6 @@ async def login_user(
             detail="Credenciales inválidas",
         )
 
-    if not user.is_active:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Usuario inactivo",
-        )
-
     return {
         "message": "Login exitoso",
         "user": {
@@ -66,7 +60,7 @@ async def login_user(
 
 @router.get("/profile")
 async def get_user_profile(
-    user_id: int = Query(...),
+    user_id: UUID = Query(...),
     db: Session = Depends(get_db),
 ):
     # TODO: Implementar obtener perfil de usuario
@@ -78,17 +72,15 @@ async def get_user_profile(
         "id": user.id,
         "username": user.username,
         "email": user.email,
-        "is_active": user.is_active,
         "created_at": user.created_at,
     }
 
 @router.put("/profile")
 async def update_user_profile(
-    user_id: int = Body(...),
+    user_id: UUID = Body(...),
     username: str | None = Body(None),
     email: str | None = Body(None),
     password: str | None = Body(None),
-    is_active: bool | None = Body(None),
     db: Session = Depends(get_db),
 ):
     # TODO: Implementar actualizar perfil de usuario
@@ -111,9 +103,6 @@ async def update_user_profile(
     if password:
         user.password_hash = password
 
-    if is_active is not None:
-        user.is_active = is_active
-
     db.commit()
     db.refresh(user)
 
@@ -123,6 +112,5 @@ async def update_user_profile(
             "id": user.id,
             "username": user.username,
             "email": user.email,
-            "is_active": user.is_active,
         },
     }

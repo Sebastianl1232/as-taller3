@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body
+from uuid import UUID
 from sqlalchemy.orm import Session
 from database import get_db
 from models.product import Product
@@ -23,7 +24,7 @@ async def get_products(db: Session = Depends(get_db)):
     ]
 
 @router.get("/{product_id}")
-async def get_product(product_id: int, db: Session = Depends(get_db)):
+async def get_product(product_id: UUID, db: Session = Depends(get_db)):
     # TODO: Implementar obtener producto por ID
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
@@ -79,7 +80,7 @@ async def create_product(
 
 @router.put("/{product_id}")
 async def update_product(
-    product_id: int,
+    product_id: UUID,
     name: str | None = Body(None),
     description: str | None = Body(None),
     price: float | None = Body(None),
@@ -123,7 +124,7 @@ async def update_product(
     }
 
 @router.delete("/{product_id}")
-async def delete_product(product_id: int, db: Session = Depends(get_db)):
+async def delete_product(product_id: UUID, db: Session = Depends(get_db)):
     # TODO: Implementar eliminar producto
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:

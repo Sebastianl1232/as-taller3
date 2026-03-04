@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body, Query
+from uuid import UUID
 from sqlalchemy.orm import Session
 from database import get_db
 from models.carts import Cart, CartItem
@@ -7,7 +8,7 @@ from models.user import User
 
 router = APIRouter()
 
-def _get_or_create_cart(db: Session, user_id: int) -> Cart:
+def _get_or_create_cart(db: Session, user_id: UUID) -> Cart:
     cart = db.query(Cart).filter(Cart.user_id == user_id).first()
     if not cart:
         cart = Cart(user_id=user_id)
@@ -17,7 +18,7 @@ def _get_or_create_cart(db: Session, user_id: int) -> Cart:
     return cart
 
 @router.get("/")
-async def get_user_cart(user_id: int = Query(...), db: Session = Depends(get_db)):
+async def get_user_cart(user_id: UUID = Query(...), db: Session = Depends(get_db)):
     # TODO: Implementar obtener carrito del usuario
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
@@ -54,8 +55,8 @@ async def get_user_cart(user_id: int = Query(...), db: Session = Depends(get_db)
 
 @router.post("/items")
 async def add_item_to_cart(
-    user_id: int = Body(...),
-    product_id: int = Body(...),
+    user_id: UUID = Body(...),
+    product_id: UUID = Body(...),
     quantity: int = Body(1),
     db: Session = Depends(get_db),
 ):
@@ -95,7 +96,7 @@ async def add_item_to_cart(
 
 @router.put("/items/{item_id}")
 async def update_cart_item(
-    item_id: int,
+    item_id: UUID,
     quantity: int = Body(...),
     db: Session = Depends(get_db),
 ):
@@ -122,7 +123,7 @@ async def update_cart_item(
     }
 
 @router.delete("/items/{item_id}")
-async def remove_item_from_cart(item_id: int, db: Session = Depends(get_db)):
+async def remove_item_from_cart(item_id: UUID, db: Session = Depends(get_db)):
     # TODO: Implementar remover item del carrito
     item = db.query(CartItem).filter(CartItem.id == item_id).first()
     if not item:
@@ -133,7 +134,7 @@ async def remove_item_from_cart(item_id: int, db: Session = Depends(get_db)):
     return {"message": "Item removido del carrito"}
 
 @router.delete("/")
-async def clear_cart(user_id: int = Query(...), db: Session = Depends(get_db)):
+async def clear_cart(user_id: UUID = Query(...), db: Session = Depends(get_db)):
     # TODO: Implementar limpiar carrito
     cart = db.query(Cart).filter(Cart.user_id == user_id).first()
     if not cart:
