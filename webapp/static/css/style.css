@@ -1,0 +1,35 @@
+/* TODO: Agregar estilos personalizados */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.product-card {
+    /* TODO: Estilos para las tarjetas de productos */
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.cart-item {
+    /* TODO: Estilos para items del carrito */
+    background-color: #fff;
+}
+
+.cart-item td {
+    vertical-align: middle;
+}
+
+/* TODO: Agregar más estilos según sea necesario */
+.navbar-brand {
+    font-weight: 700;
+}

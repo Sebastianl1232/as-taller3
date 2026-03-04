@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Carrito - Tienda Virtual{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="mb-0">Tu carrito</h1>
+    {% if items %}
+        <form action="{{ url_for('clear_cart') }}" method="post">
+            <button type="submit" class="btn btn-outline-danger btn-sm">Limpiar carrito</button>
+        </form>
+    {% endif %}
+</div>
+
+{% if items %}
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th style="width: 170px;">Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr class="cart-item" data-item-id="{{ item.item_id }}">
+                        <td>{{ item.name }}</td>
+                        <td>${{ '%.2f'|format(item.price) }}</td>
+                        <td>
+                            <form action="{{ url_for('update_cart_item', item_id=item.item_id) }}" method="post" class="d-flex gap-2">
+                                <input type="number" class="form-control form-control-sm" name="quantity" min="1" value="{{ item.quantity }}">
+                                <button type="submit" class="btn btn-sm btn-primary">Actualizar</button>
+                            </form>
+                        </td>
+                        <td>${{ '%.2f'|format(item.subtotal) }}</td>
+                        <td>
+                            <form action="{{ url_for('remove_cart_item', item_id=item.item_id) }}" method="post">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-end">
+        <h4>Total: ${{ '%.2f'|format(total) }}</h4>
+    </div>
+{% else %}
+    <div class="alert alert-info">Tu carrito está vacío.</div>
+    <a href="{{ url_for('products') }}" class="btn btn-primary">Ver productos</a>
+{% endif %}
+{% endblock %}
