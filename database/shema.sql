@@ -53,9 +53,9 @@ VALUES
 
 INSERT INTO products (name, description, price, stock, image_url)
 VALUES
-    ('Laptop Gamer', 'Laptop de alto rendimiento para juegos', 4500000.00, 8, 'https://example.com/images/laptop-gamer.jpg'),
-    ('Mouse Inalambrico', 'Mouse ergonomico con conexion Bluetooth', 85000.00, 30, 'https://example.com/images/mouse.jpg'),
-    ('Teclado Mecanico', 'Teclado mecanico RGB con switches azules', 210000.00, 20, 'https://example.com/images/teclado.jpg');
+    ('Laptop Gamer', 'Laptop de alto rendimiento para juegos', 4500000.00, 8, '/static/img/laptop-gamer.svg'),
+    ('Mouse Inalambrico', 'Mouse ergonomico con conexion Bluetooth', 85000.00, 30, '/static/img/mouse-inalambrico.svg'),
+    ('Teclado Mecanico', 'Teclado mecanico RGB con switches azules', 210000.00, 20, '/static/img/teclado-mecanico.svg');
 
 INSERT INTO carts (user_id)
 SELECT id FROM users WHERE email = 'juan@tienda.com';

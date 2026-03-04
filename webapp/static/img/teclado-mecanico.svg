@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-label="Teclado Mecanico">
+  <rect width="800" height="450" fill="#ede9fe"/>
+  <rect x="110" y="120" width="580" height="220" rx="22" fill="#312e81"/>
+  <g fill="#a5b4fc">
+    <rect x="145" y="155" width="55" height="40" rx="6"/>
+    <rect x="215" y="155" width="55" height="40" rx="6"/>
+    <rect x="285" y="155" width="55" height="40" rx="6"/>
+    <rect x="355" y="155" width="55" height="40" rx="6"/>
+    <rect x="425" y="155" width="55" height="40" rx="6"/>
+    <rect x="495" y="155" width="55" height="40" rx="6"/>
+    <rect x="565" y="155" width="90" height="40" rx="6"/>
+    <rect x="145" y="210" width="90" height="40" rx="6"/>
+    <rect x="250" y="210" width="55" height="40" rx="6"/>
+    <rect x="320" y="210" width="55" height="40" rx="6"/>
+    <rect x="390" y="210" width="55" height="40" rx="6"/>
+    <rect x="460" y="210" width="55" height="40" rx="6"/>
+    <rect x="530" y="210" width="125" height="40" rx="6"/>
+    <rect x="145" y="265" width="125" height="40" rx="6"/>
+    <rect x="285" y="265" width="280" height="40" rx="6"/>
+    <rect x="580" y="265" width="75" height="40" rx="6"/>
+  </g>
+  <text x="400" y="405" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#312e81" text-anchor="middle">Teclado Mecanico</text>
+</svg>
