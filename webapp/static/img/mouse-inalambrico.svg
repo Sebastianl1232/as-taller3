@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-label="Mouse Inalambrico">
-  <rect width="800" height="450" fill="#dcfce7"/>
-  <ellipse cx="400" cy="220" rx="145" ry="185" fill="#166534"/>
-  <ellipse cx="400" cy="220" rx="110" ry="150" fill="#22c55e"/>
-  <line x1="400" y1="80" x2="400" y2="165" stroke="#052e16" stroke-width="8"/>
-  <text x="400" y="405" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#14532d" text-anchor="middle">Mouse Inalambrico</text>
-</svg>
